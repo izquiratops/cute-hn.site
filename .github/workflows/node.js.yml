@@ -36,4 +36,5 @@ jobs:
         REPO: self
         BRANCH: gh_pages
         FOLDER: dist/hacker-reader
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         MESSAGE: "Build: ({sha}) {msg}"
