@@ -10,6 +10,7 @@ h3:not(.next-page):before {
   content: counter(count)".";
   counter-increment: count;
   margin-inline-end: var(--space-xs);
+  color: var(--primary-alt);
 }
 
 .settings-side-nav {

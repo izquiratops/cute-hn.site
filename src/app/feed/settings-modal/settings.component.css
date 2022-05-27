@@ -30,7 +30,7 @@ fieldset {
 
 input {
   height: 1rem;
-  margin-inline-end: 1ch;
+  margin: 0;
 }
 
 footer {
@@ -44,11 +44,11 @@ footer {
   margin: var(--space-sm);
 }
 
-.font-input-wrapper {
+.input-wrapper {
   display: grid;
   grid-auto-flow: column;
 
   align-items: center;
   justify-content: start;
-  grid-gap: var(--space-xs);
+  grid-gap: var(--space-sm);
 }

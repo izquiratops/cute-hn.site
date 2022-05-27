@@ -2,7 +2,7 @@
   <div class="settings-body">
     <fieldset>
       <legend>Font</legend>
-      <div class="font-input-wrapper">
+      <div class="input-wrapper">
         <label for="range-font-size">Font Size</label>
         <input id="range-font-size" type="range" min="12" max="24" value="13" step="1"
                [value]="fontSize"
@@ -13,7 +13,7 @@
 
     <fieldset>
       <legend>Theme</legend>
-      <div class="field-row">
+      <div class="input-wrapper">
         <input type="checkbox" id="dark-mode" [checked]="isDarkTheme" (change)="switchTheme($event)">
         <label for="dark-mode">Dark mode</label>
       </div>

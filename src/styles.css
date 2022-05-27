@@ -40,8 +40,8 @@ body {
   --background: hsl(40, 20%, 95%);
   --font-main: hsl(0, 0%, 0%);
   --font-alt: hsl(40, 20%, 100%);
-  --primary-main: hsl(0, 55%, 55%);
-  --primary-alt: hsl(0, 45%, 60%);
+  --primary-main: hsl(0, 55%, 65%);
+  --primary-alt: hsl(0, 45%, 55%);
 
   background: var(--background);
   color: var(--font-main);
@@ -51,8 +51,8 @@ body.dark-theme {
   --background: hsl(200, 10%, 10%);
   --font-main: hsl(40, 30%, 100%);
   --font-alt: hsl(40, 30%, 100%);
-  --primary-main: hsl(220, 65%, 55%);
-  --primary-alt: hsl(200, 50%, 60%);
+  --primary-main: hsl(220, 65%, 65%);
+  --primary-alt: hsl(200, 50%, 65%);
 }
 
 main {
