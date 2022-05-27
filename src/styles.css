@@ -40,8 +40,8 @@ body {
   --background: hsl(40, 20%, 95%);
   --font-main: hsl(0, 0%, 0%);
   --font-alt: hsl(40, 20%, 100%);
-  --primary-main: hsl(0, 55%, 65%);
-  --primary-alt: hsl(0, 45%, 55%);
+  --primary-main: hsl(0, 55%, 60%);
+  --primary-alt: hsl(0, 45%, 70%);
 
   background: var(--background);
   color: var(--font-main);
@@ -51,8 +51,8 @@ body.dark-theme {
   --background: hsl(200, 10%, 10%);
   --font-main: hsl(40, 30%, 100%);
   --font-alt: hsl(40, 30%, 100%);
-  --primary-main: hsl(220, 65%, 65%);
-  --primary-alt: hsl(200, 50%, 65%);
+  --primary-main: hsl(220, 65%, 60%);
+  --primary-alt: hsl(200, 50%, 70%);
 }
 
 main {
@@ -134,7 +134,7 @@ hr {
   height: 2px;
   border: none;
   opacity: 0.6;
-  background-color: var(--primary-main);
+  background-color: var(--primary-alt);
 
   margin-block: var(--space-sm);
 }
@@ -160,7 +160,7 @@ pre {
   }
 
   header {
-    padding-block: var(--space-sm);
+    padding-block: var(--space-md);
   }
 
   main > ul > li:last-child {
