@@ -3,7 +3,7 @@
     <fieldset>
       <legend>Font</legend>
       <div class="font-input-wrapper">
-        <label for="range-font-size">Line Height</label>
+        <label for="range-font-size">Font Size</label>
         <input id="range-font-size" type="range" min="12" max="24" value="13" step="1"
                [value]="fontSize"
                (change)="changeFontSize($event)"/>
@@ -20,12 +20,21 @@
 
     </fieldset>
 
-    <fieldset style="border: none">
+    <fieldset style="border: none; text-align: center">
+      <p></p>
       <p>
-        <span>You can find the source code on </span>
-        <a href="https://github.com/izquiratops"
+        It's made with angular and love, the source code is on
+        <a href="https://github.com/izquiratops/Cute-Hacker-News"
            target="_blank"
-           rel="noopener noreferrer">Github</a>
+           rel="noopener noreferrer">
+          Github
+        </a>.
+      </p>
+      <p>
+        You can
+        <a href="https://ko-fi.com/izquiratops" target="_blank" rel="noopener noreferrer">
+          buy me a coffee
+        </a> if you'd like ❤️
       </p>
     </fieldset>
 

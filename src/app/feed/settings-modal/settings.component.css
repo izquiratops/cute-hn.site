@@ -18,6 +18,11 @@ header {
   padding: var(--space-sm);
 }
 
+a {
+  color: var(--primary-main);
+  font-weight: bold;
+}
+
 fieldset {
   border-color: var(--primary-alt);
   border-radius: 6px;
