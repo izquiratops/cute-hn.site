@@ -1,0 +1,28 @@
+header {
+  place-content: center;
+}
+
+ul {
+  counter-reset: count;
+}
+
+h3:not(.next-page):before {
+  content: counter(count)".";
+  counter-increment: count;
+  margin-inline-end: var(--space-xs);
+}
+
+.settings-side-nav {
+  display: grid;
+  grid-auto-flow: column;
+  grid-gap: var(--space-sm);
+}
+
+.story-item {
+  display: grid;
+  grid-gap: var(--space-xxs);
+}
+
+.next-page {
+  margin-block: var(--space-md);
+}

@@ -1,0 +1,81 @@
+<header #header>
+  <ng-container
+    [ngTemplateOutlet]="headerBox"
+    [ngTemplateOutletContext]="{ $implicit: story | async }">
+  </ng-container>
+</header>
+
+<main>
+  <p class="story-text" [innerHTML]="(story | async)!.text"></p>
+
+  <ul class="tree-view-list">
+    <ng-container
+      [ngTemplateOutlet]="nodeTree"
+      [ngTemplateOutletContext]="{ $implicit: (replies | async) || [] }">
+    </ng-container>
+  </ul>
+</main>
+
+<ng-template #headerBox let-story>
+  <nav>
+    <h3>
+      <a [routerLink]="['/feed']" class="return-btn" title="Go back to homepage">
+        Hacker News
+      </a>
+    </h3>
+  </nav>
+
+  <div class="header-flex-wrapper">
+    <h2>{{ story.title }}</h2>
+
+    <section class="details-wrapper">
+      <div>
+        <b>{{ story.by }}</b> | {{ story.time * 1000 | date: "medium" }}
+      </div>
+
+      <a *ngIf="story.url" [href]="trustedUrl | async" target="_blank" rel="noopener noreferrer">
+        {{ story.url | domain }}
+      </a>
+    </section>
+  </div>
+</ng-template>
+
+<ng-template #nodeTree let-replies>
+  <li *ngFor="let reply of replies">
+
+    <!-- comment with replies -->
+    <ng-container *ngIf="reply.replies?.length > 0; else leaf">
+      <details open>
+        <ng-container
+          [ngTemplateOutlet]="replyBox"
+          [ngTemplateOutletContext]="{ $implicit: reply }">
+        </ng-container>
+        <ul class="text-replies">
+          <ng-container
+            [ngTemplateOutlet]="nodeTree"
+            [ngTemplateOutletContext]="{ $implicit: reply.replies }">
+          </ng-container>
+        </ul>
+      </details>
+    </ng-container>
+
+    <!-- comment without replies -->
+    <ng-template #leaf>
+      <ng-container
+        [ngTemplateOutlet]="replyBox"
+        [ngTemplateOutletContext]="{ $implicit: reply }">
+      </ng-container>
+    </ng-template>
+
+  </li>
+</ng-template>
+
+<ng-template #replyBox let-reply>
+  <summary>
+    <span>
+      <b>{{ reply.by }}</b>, {{ reply.time * 1000 | date: "short" }}
+    </span>
+  </summary>
+  <p [innerHTML]="reply.text" class="text-body"></p>
+</ng-template>
+

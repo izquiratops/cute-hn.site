@@ -1,0 +1,60 @@
+<app-settings-modal></app-settings-modal>
+
+<header>
+  <h1>Hacker News</h1>
+</header>
+
+<main>
+  <nav>
+    <select name="feed-type" id="feed-type" title="Change the feed section"
+            [value]="feedType"
+            (change)="reloadFeedList($event)">
+      <option *ngFor="let type of types" [value]="type.id">
+        {{ type.label }}
+      </option>
+    </select>
+
+    <div class="settings-side-nav">
+      <!-- TODO: title -->
+      <button (click)="showConfigModal()">Settings</button>
+      <button (click)="refreshFeedList()" title="Clear all and get the first page again">Refresh</button>
+    </div>
+  </nav>
+
+  <ul>
+    <li class="story-item" *ngFor="let story of stories | async; trackBy: trackById">
+      <ng-container
+        [ngTemplateOutlet]="storyItem"
+        [ngTemplateOutletContext]="{ $implicit: story }">
+      </ng-container>
+    </li>
+
+    <li>
+      <h3 class="next-page">
+        <a (click)="loadNextPage()" title="Load the following page">
+          Load next page
+        </a>
+      </h3>
+    </li>
+  </ul>
+</main>
+
+<ng-template #storyItem let-story>
+  <h3>{{ story.title }}</h3>
+
+  <a *ngIf="story.url"
+     [href]="story.url"
+     target="_blank"
+     rel="noopener noreferrer"
+     title="Open this link on another tab">
+    {{ story.url | domain }}
+  </a>
+
+  <p>{{ story.score }} points by {{ story.by }}, {{ story.time | elapsedTime }}</p>
+
+  <a [routerLink]="['/replies/' + story.id]" (click)="saveScrollPosition()" title="Go to the replies section">
+    {{ story.descendants || 0 }} replies
+  </a>
+
+  <hr>
+</ng-template>

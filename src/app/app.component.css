@@ -1,0 +1,6 @@
+.to-top-btn {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  margin: var(--space-md);
+}

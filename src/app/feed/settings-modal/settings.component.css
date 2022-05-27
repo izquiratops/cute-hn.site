@@ -1,0 +1,49 @@
+dialog {
+  padding: 0;
+  border: 3px solid var(--primary-main);
+  border-radius: 6px;
+  min-width: min(60ch, 90vw);
+  box-shadow: var(--shadow);
+
+  background: var(--background);
+  color: var(--font-main);
+}
+
+#about-dialog::backdrop {
+  background-color: hsla(0, 0%, 0%, 0.8);
+}
+
+header {
+  place-content: center;
+  padding: var(--space-sm);
+}
+
+fieldset {
+  border-color: var(--primary-alt);
+  border-radius: 6px;
+}
+
+input {
+  height: 1rem;
+  margin-inline-end: 1ch;
+}
+
+footer {
+  display: grid;
+  place-content: end;
+}
+
+.settings-body {
+  display: grid;
+  grid-gap: var(--space-sm);
+  margin: var(--space-sm);
+}
+
+.font-input-wrapper {
+  display: grid;
+  grid-auto-flow: column;
+
+  align-items: center;
+  justify-content: start;
+  grid-gap: var(--space-xs);
+}

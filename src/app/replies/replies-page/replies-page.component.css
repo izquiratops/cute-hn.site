@@ -1,0 +1,68 @@
+header {
+  justify-content: center;
+  grid-template-columns: var(--centered-layout);
+  margin-block-end: var(--space-md);
+}
+
+summary {
+  cursor: pointer;
+  margin-block-start: var(--space-md);
+}
+
+li, ul {
+  list-style: none;
+  margin-block: var(--space-xs);
+}
+
+li {
+  border-left: 2px solid var(--primary-main);
+  padding-inline-start: var(--space-sm);
+}
+
+/* Header */
+
+.header-flex-wrapper {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  gap: var(--space-sm);
+}
+
+.details-wrapper {
+  display: grid;
+  grid-auto-flow: row;
+  grid-row-gap: var(--space-xs);
+}
+
+/* List of replies */
+
+.tree-view-list {
+  border: 0;
+  margin: 0;
+}
+
+/* Text reply */
+
+.text-body {
+  margin-block-start: var(--space-xs);
+}
+
+.text-replies {
+  padding-inline-start: var(--space-md);
+}
+
+/* When the screen está chiquita */
+
+@media screen and (max-width: 810px) {
+  header {
+    margin-block-end: var(--space-sm);
+  }
+
+  summary {
+    margin-block-start: var(--space-sm);
+  }
+
+  .text-replies {
+    padding-inline-start: 0;
+  }
+}

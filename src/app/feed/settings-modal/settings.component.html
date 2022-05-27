@@ -1,0 +1,36 @@
+<dialog #about>
+  <div class="settings-body">
+    <fieldset>
+      <legend>Font</legend>
+      <div class="font-input-wrapper">
+        <label for="range-font-size">Line Height</label>
+        <input id="range-font-size" type="range" min="12" max="24" value="13" step="1"
+               [value]="fontSize"
+               (change)="changeFontSize($event)"/>
+        <label for="range-font-size">{{ fontSize }} px</label>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Theme</legend>
+      <div class="field-row">
+        <input type="checkbox" id="dark-mode" [checked]="isDarkTheme" (change)="switchTheme($event)">
+        <label for="dark-mode">Dark mode</label>
+      </div>
+
+    </fieldset>
+
+    <fieldset style="border: none">
+      <p>
+        <span>You can find the source code on </span>
+        <a href="https://github.com/izquiratops"
+           target="_blank"
+           rel="noopener noreferrer">Github</a>
+      </p>
+    </fieldset>
+
+    <footer>
+      <button aria-label="Close" (click)="closeConfigModal()">Close</button>
+    </footer>
+  </div>
+</dialog>
