@@ -57,11 +57,10 @@ body.dark-theme {
 
 main {
   display: grid;
-  padding-inline: var(--space-sm);
-  margin-block-end: var(--space-xxl);
-
   justify-content: center;
   grid-template-columns: var(--centered-layout);
+
+  margin-block-end: var(--space-xxl);
 }
 
 ul {
@@ -152,6 +151,10 @@ pre {
 }
 
 @media screen and (max-width: 810px) {
+  :root {
+    --centered-layout: 90vw
+  }
+
   h1 {
     font-size: 1.8rem;
   }
