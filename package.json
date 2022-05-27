@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --base-href ./hacker-news-reader",
+    "build": "ng build --deploy-url ./hacker-news-reader",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
