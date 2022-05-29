@@ -43,4 +43,21 @@ export class RepliesPageComponent implements OnInit {
     );
   }
 
+  /* TODO: try this with HTTPS
+  // Get current value of Story$
+
+  handleSharePost() {
+    console.log('sharing...');
+
+    if (navigator.share) {
+      navigator.share({
+        title: 'web.dev',
+        text: 'Check out web.dev.',
+        url: 'https://web.dev/',
+      })
+        .then(() => console.log('Successful share'))
+        .catch((error) => console.log('Error sharing', error));
+    }
+  } */
+
 }

@@ -34,9 +34,14 @@
         <b>{{ story.by }}</b> | {{ story.time * 1000 | date: "medium" }}
       </div>
 
-      <a *ngIf="story.url" [href]="trustedUrl | async" target="_blank" rel="noopener noreferrer">
-        {{ story.url | domain }}
-      </a>
+      <span *ngIf="story.url">
+        <a [href]="trustedUrl | async" target="_blank" rel="noopener noreferrer">
+          {{ story.url | domain }}
+        </a>
+        <!-- <a (click)="handleSharePost()">
+          Share
+        </a> -->
+      </span>
     </section>
 
   </div>
