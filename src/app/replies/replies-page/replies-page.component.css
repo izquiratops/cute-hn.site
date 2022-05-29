@@ -6,11 +6,10 @@ header {
 
 summary {
   cursor: pointer;
-  margin-block-start: var(--space-md);
+  margin-block: var(--space-sm);
 }
 
 li, ul {
-  list-style: none;
   margin-block: var(--space-xs);
 }
 
@@ -44,7 +43,7 @@ li {
 /* Text reply */
 
 .text-body {
-  margin-block-start: var(--space-xs);
+  overflow-wrap: break-word;
 }
 
 .text-replies {
@@ -59,7 +58,7 @@ li {
   }
 
   summary {
-    margin-block-start: var(--space-sm);
+    margin-block: var(--space-xs);
   }
 
   .text-replies {

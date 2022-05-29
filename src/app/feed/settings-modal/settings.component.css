@@ -1,12 +1,12 @@
 dialog {
-  padding: 0;
-  border: 3px solid var(--primary-main);
-  border-radius: 6px;
   min-width: min(60ch, 90vw);
   box-shadow: var(--shadow);
+  border: 3px solid var(--primary-main);
 
+  padding: 0;
   background: var(--background);
   color: var(--font-main);
+  border-radius: 8px;
 }
 
 #about-dialog::backdrop {
