@@ -1,4 +1,4 @@
-<header #header>
+<header>
   <ng-container
     [ngTemplateOutlet]="headerBox"
     [ngTemplateOutletContext]="{ $implicit: story | async }">
@@ -26,6 +26,7 @@
   </nav>
 
   <div class="header-flex-wrapper">
+
     <h2>{{ story.title }}</h2>
 
     <section class="details-wrapper">
@@ -37,35 +38,30 @@
         {{ story.url | domain }}
       </a>
     </section>
+
   </div>
 </ng-template>
 
 <ng-template #nodeTree let-replies>
   <li *ngFor="let reply of replies">
 
-    <!-- comment with replies -->
-    <ng-container *ngIf="reply.replies?.length > 0; else leaf">
+    <ng-container>
       <details open>
+
         <ng-container
           [ngTemplateOutlet]="replyBox"
           [ngTemplateOutletContext]="{ $implicit: reply }">
         </ng-container>
-        <ul class="text-replies">
+
+        <ul class="text-replies" *ngIf="reply.replies?.length > 0">
           <ng-container
             [ngTemplateOutlet]="nodeTree"
             [ngTemplateOutletContext]="{ $implicit: reply.replies }">
           </ng-container>
         </ul>
+
       </details>
     </ng-container>
-
-    <!-- comment without replies -->
-    <ng-template #leaf>
-      <ng-container
-        [ngTemplateOutlet]="replyBox"
-        [ngTemplateOutletContext]="{ $implicit: reply }">
-      </ng-container>
-    </ng-template>
 
   </li>
 </ng-template>
