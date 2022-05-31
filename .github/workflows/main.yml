@@ -37,4 +37,4 @@ jobs:
         password: ${{ secrets.PASSWORD }}
         source: "dist/hacker-reader"
         target: "/var/www/cute-hn.site"
-        strip_components: 0
+        strip_components: 2
