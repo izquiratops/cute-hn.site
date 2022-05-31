@@ -35,5 +35,5 @@ jobs:
         port: ${{ secrets.PORT }}
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
-        source: "dist"
-        target: "/var/www/cute-hn.site/"
+        source: "dist/hacker-reader"
+        target: "/var/www/cute-hn.site"
