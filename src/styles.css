@@ -141,6 +141,7 @@ hr {
  * BUT there's no way to apply it there because of encapsulation, so it
  * stays here.
  */
+/* TODO: .text-replies */
 pre {
   margin-block: var(--space-xs);
   padding: var(--space-sm);
