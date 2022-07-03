@@ -8,7 +8,7 @@
   --space-xxl: 6rem;
 
   /* Default value is 13px, then JS applies the user stored value */
-  --theme-font-size: 13px;
+  --theme-font-size: 15px;
 
   --centered-layout: minmax(
     min(60ch, 80vw),

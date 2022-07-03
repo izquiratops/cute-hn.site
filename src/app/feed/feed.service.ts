@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {BehaviorSubject, concatMap, map, Observable, scan, Subject, tap} from 'rxjs';
+import {BehaviorSubject, Observable, Subject, concatMap, map, scan, tap} from 'rxjs';
 
 import {FeedAction, HNItem, TYPES} from '../shared/hn.modal';
 import {FirebaseService} from "../shared/firebase.service";
@@ -12,9 +12,11 @@ export class FeedService {
     scrollPosition: [number, number] = [0, 0];
     private readonly DEBUG = false;
     private readonly STORIES_PAGE_SIZE = 30;
+
     // Content-related state
     private ids: number[] = [];
     private page = 0;
+
     // List of stories
     private feedStore = new BehaviorSubject<HNItem[]>([]);
     private feedDispatcher = new Subject<FeedAction>();
@@ -37,6 +39,7 @@ export class FeedService {
     constructor(
         private fireService: FirebaseService
     ) {
+        console.log('heyo!');
     }
 
     get feedStories$(): Observable<HNItem[]> {
@@ -65,7 +68,6 @@ export class FeedService {
     }
 
     loadNextPage(): Observable<FeedAction> {
-        console.debug('page fetch', this.page);
         const storiesOffset = this.page * this.STORIES_PAGE_SIZE;
         const pageIds = this.ids.slice(storiesOffset, storiesOffset + this.STORIES_PAGE_SIZE);
 
