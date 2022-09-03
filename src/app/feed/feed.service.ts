@@ -31,7 +31,8 @@ export class FeedService {
             }
         }, []),
         tap(() => {
-            // Side Effect: every time a page is loaded the index increases +1
+            // TODO: This is confuse, on 'overwriteList' page is 0 and isn't reflected here
+            // Every time a page is loaded the index increases +1
             this.page++;
         })
     ).subscribe((res) => this.feedStore.next(res));
