@@ -1,18 +1,10 @@
-import { Injectable } from "@angular/core";
-import { initializeApp } from 'firebase/app';
-import { getDatabase, ref, child, get, DatabaseReference } from 'firebase/database';
+import {Injectable} from "@angular/core";
+import {initializeApp} from 'firebase/app';
+import {DatabaseReference, child, get, getDatabase, ref} from 'firebase/database';
 
-import { from, Observable, EMPTY } from 'rxjs';
-import {
-    filter,
-    map,
-    mergeMap,
-    reduce,
-    expand,
-    pluck,
-    tap,
-} from 'rxjs/operators';
-import { HNItem } from "./hn.modal";
+import {EMPTY, from, Observable} from 'rxjs';
+import {expand, filter, map, mergeMap, pluck, reduce, tap,} from 'rxjs/operators';
+import {HNItem} from "./hn.modal";
 
 @Injectable({
     providedIn: 'root',
@@ -51,18 +43,18 @@ export class FirebaseService {
             // Item struct:
             //  - 'node' is a ref to itself
             //  - 'parent' ref
-            map((replies) => ({ node: replies })),
-            expand(({ node }) => {
+            map((replies) => ({node: replies})),
+            expand(({node}) => {
                 if (node.kids) {
                     return from(node.kids).pipe(
                         mergeMap((replyId) => this.getItemById(replyId)),
-                        map((reply) => ({ node: reply, parent: node }))
+                        map((reply) => ({node: reply, parent: node}))
                     );
                 } else {
                     return EMPTY;
                 }
             }),
-            reduce((acc, { node, parent }) => {
+            reduce((acc, {node, parent}) => {
                 if (parent.replies) {
                     parent.replies.push(node);
                 } else {
