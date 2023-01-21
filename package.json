@@ -1,6 +1,6 @@
 {
-  "name": "hacker-reader",
-  "version": "0.0.0",
+  "name": "cute-hn",
+  "version": "0.0.1",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -9,7 +9,6 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
-  "private": true,
   "dependencies": {
     "@angular/common": "^15.1.1",
     "@angular/compiler": "^15.1.1",
