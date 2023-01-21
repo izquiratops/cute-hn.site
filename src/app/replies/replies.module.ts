@@ -14,9 +14,9 @@ const routes: Routes = [
     canActivate: [RepliesGuard]
   },
   {
-    // There's no such a thing like stories without IDs
     path: '',
-    redirectTo: '..'
+    redirectTo: '..',
+    pathMatch: 'full',
   }
 ]
 

@@ -13,6 +13,7 @@ const routes: Routes = [
   {
     path: 'replies',
     loadChildren: () => import('./replies/replies.module').then(m => m.RepliesModule),
+    pathMatch: 'prefix',
   },
   {
     path: '**',

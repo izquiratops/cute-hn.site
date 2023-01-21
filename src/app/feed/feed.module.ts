@@ -13,11 +13,12 @@ const routes: Routes = [
   {
     path: 'feed',
     component: FeedPageComponent,
-    canActivate: [FeedGuard]
+    canActivate: [FeedGuard],
   },
   {
     path: '',
-    redirectTo: 'feed'
+    redirectTo: 'feed',
+    pathMatch: 'full',
   }
 ]
 
