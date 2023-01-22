@@ -3,6 +3,11 @@ export interface FeedAction {
     payload: HNItem[]
 }
 
+export interface StoryAction {
+    type: 'loadStory' | 'loadLazyReplies',
+    payload: HNItem
+}
+
 export interface HNItem {
     id: number; // The item's unique id.
     deleted: boolean; // true if the item is deleted.

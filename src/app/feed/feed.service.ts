@@ -15,14 +15,14 @@ export class FeedService {
     private ids: number[] = [];
     private page = 0;
 
-    private feedStore = new BehaviorSubject<HNItem[]>([]);
+    private feedSlice = new BehaviorSubject<HNItem[]>([]);
     private feedDispatcher = new Subject<FeedAction>();
     private feedReducer = this.feedDispatcher.pipe(
-        scan<FeedAction, HNItem[]>((currState, action) => {
-            environment.showLogs && console.debug('feed > reducer', action, currState);
+        scan<FeedAction, HNItem[]>((state, action) => {
+            environment.showLogs && console.debug('feed > reducer', action, state);
             switch (action.type) {
                 case 'concatList':
-                    return [...currState, ...action.payload] as HNItem[];
+                    return [...state, ...action.payload] as HNItem[];
                 case 'overwriteList':
                     return action.payload;
             }
@@ -32,7 +32,7 @@ export class FeedService {
             // Every time a page is loaded the index increases +1
             this.page++;
         })
-    ).subscribe((res) => this.feedStore.next(res));
+    ).subscribe((res) => this.feedSlice.next(res));
 
     constructor(
         private fireService: FirebaseService
@@ -40,7 +40,7 @@ export class FeedService {
     }
 
     get feedStories$(): Observable<HNItem[]> {
-        return this.feedStore.asObservable();
+        return this.feedSlice.asObservable();
     }
 
     loadFeedByType(): Observable<FeedAction> {
@@ -53,7 +53,7 @@ export class FeedService {
                 // Get the 10 first stories
                 map(ids => ids.slice(0, this.STORIES_PAGE_SIZE)),
                 // Fetch the content
-                concatMap(ids => this.fireService.getStoriesContent(ids)),
+                concatMap(ids => this.fireService.getItemList(ids)),
                 // Define action and dispatch it
                 map(stories => ({
                     type: 'overwriteList',
@@ -67,7 +67,7 @@ export class FeedService {
         const storiesOffset = this.page * this.STORIES_PAGE_SIZE;
         const pageIds = this.ids.slice(storiesOffset, storiesOffset + this.STORIES_PAGE_SIZE);
 
-        return this.fireService.getStoriesContent(pageIds)
+        return this.fireService.getItemList(pageIds)
             .pipe(
                 map(stories => ({
                     type: 'concatList',

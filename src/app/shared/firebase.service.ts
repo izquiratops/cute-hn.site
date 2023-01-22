@@ -22,12 +22,26 @@ export class FirebaseService {
         this.DATABASE = ref(database);
     }
 
+    private getItemById(id: number) {
+        const dbQuery = child(this.DATABASE, `${this.VERSION}/item/${id}`);
+        return this.fetchFromDatabase<HNItem>(dbQuery)
+    }
+
+    private fetchFromDatabase<T>(dbQuery: DatabaseReference): Observable<T> {
+        return from(get(dbQuery))
+            .pipe(
+                map(snapshot => snapshot.val()),
+                filter((item) => !item.deleted),
+                tap((item) => environment.showLogs && console.debug('firebase > fetch', item))
+            );
+    }
+
     getIDsList(type: string): Observable<number[]> {
         const dbQuery = child(this.DATABASE, `${this.VERSION}/${type}`);
         return this.fetchFromDatabase<number[]>(dbQuery);
     }
 
-    getStoriesContent(indices: number[]): Observable<HNItem[]> {
+    getItemList(indices: number[]): Observable<HNItem[]> {
         return from(indices).pipe(
             mergeMap((id) => this.getItemById(id)),
             reduce((acc, curr) => {
@@ -37,7 +51,7 @@ export class FirebaseService {
         );
     }
 
-    getStoryWithReplies(id: number, limit: number = 3): Observable<HNItem> {
+    getItemRecursively(id: number, limit: number = Infinity): Observable<HNItem> {
         const context = {
             parentNodes: [] as number[],
             siblingNodes: [] as number[],
@@ -45,10 +59,6 @@ export class FirebaseService {
         };
 
         return this.getItemById(id).pipe(
-            // Fetch replies with recursion
-            // Item struct:
-            //  - 'node' is a ref to itself
-            //  - 'parent' ref
             map((replies) => ({node: replies})),
             expand(({node}) => {
                 if (context.parentNodes.includes(node.parent)) {
@@ -83,19 +93,5 @@ export class FirebaseService {
             }),
             pluck('node')
         );
-    }
-
-    getItemById(id: number) {
-        const dbQuery = child(this.DATABASE, `${this.VERSION}/item/${id}`);
-        return this.fetchFromDatabase<HNItem>(dbQuery)
-    }
-
-    private fetchFromDatabase<T>(dbQuery: DatabaseReference): Observable<T> {
-        return from(get(dbQuery))
-            .pipe(
-                map(snapshot => snapshot.val()),
-                filter((item) => !item.deleted),
-                tap((item) => environment.showLogs && console.debug('firebase > fetch', item))
-            );
     }
 }

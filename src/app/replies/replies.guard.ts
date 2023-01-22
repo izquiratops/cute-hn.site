@@ -17,7 +17,7 @@ export class RepliesGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     const targetId = Number(route.params['id']);
 
-    return this.repliesService.loadStoryWithReplies(targetId).pipe(
+    return this.repliesService.loadStory(targetId).pipe(
       map(() => true),
       catchError(_ => {
         this.router.navigate(['/feed']);

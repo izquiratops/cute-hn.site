@@ -60,7 +60,9 @@
         </details>
 
         <div *ngIf="reply.lazyLoaded" class="lazy-loaded-container">
-            <a class="lazy-loaded-button" (click)="handleLazyLoad(reply)">Load more</a>
+            <a class="lazy-loaded-button" (click)="handleLazyLoad(reply)">
+                Load more
+            </a>
         </div>
     </li>
 </ng-template>
