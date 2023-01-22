@@ -9,10 +9,6 @@ dialog {
   border-radius: 8px;
 }
 
-#about-dialog::backdrop {
-  background-color: hsla(0, 0%, 0%, 0.8);
-}
-
 header {
   place-content: center;
   padding: var(--space-sm);
@@ -24,7 +20,7 @@ a {
 }
 
 fieldset {
-  border-color: var(--primary-alt);
+  border-color: var(--primary-main);
   border-radius: 6px;
 }
 

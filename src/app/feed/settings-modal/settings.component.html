@@ -1,13 +1,13 @@
-<dialog #about>
+<dialog #dialog>
   <div class="settings-body">
     <fieldset>
       <legend>Font</legend>
       <div class="input-wrapper">
         <label for="range-font-size">Font Size</label>
-        <input id="range-font-size" type="range" min="12" max="24" value="13" step="1"
+        <input id="range-font-size" type="range" min="50" max="160" value="100" step="5"
                [value]="fontSize"
-               (change)="changeFontSize($event)"/>
-        <label for="range-font-size">{{ fontSize }} px</label>
+               (change)="changeFontAdjust($event)"/>
+        <label for="range-font-size">{{ fontSize }} %</label>
       </div>
     </fieldset>
 
@@ -39,7 +39,7 @@
     </fieldset>
 
     <footer>
-      <button aria-label="Close" (click)="closeConfigModal()">Close</button>
+      <button aria-label="Close" (click)="closeModal()">Close</button>
     </footer>
   </div>
 </dialog>

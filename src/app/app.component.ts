@@ -21,7 +21,7 @@ export class AppComponent implements OnInit {
     this.settingsService.initDarkTheme();
   }
 
-  scrollUp(): void {
+  scrollUp() {
     this.topRef.nativeElement.scrollIntoView({ behavior: "smooth" });
   }
 

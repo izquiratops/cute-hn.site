@@ -3,26 +3,23 @@ import {BehaviorSubject, Observable, Subject, concatMap, map, scan, tap} from 'r
 
 import {FeedAction, HNItem, TYPES} from '../shared/hn.modal';
 import {FirebaseService} from "../shared/firebase.service";
+import {environment} from "../../environments/environment";
 
 @Injectable()
 export class FeedService {
 
-    // UI state
     feedType = TYPES[0].id;
     scrollPosition: [number, number] = [0, 0];
-    private readonly DEBUG = false;
     private readonly STORIES_PAGE_SIZE = 30;
 
-    // Content-related state
     private ids: number[] = [];
     private page = 0;
 
-    // List of stories
     private feedStore = new BehaviorSubject<HNItem[]>([]);
     private feedDispatcher = new Subject<FeedAction>();
     private feedReducer = this.feedDispatcher.pipe(
         scan<FeedAction, HNItem[]>((currState, action) => {
-            this.DEBUG && console.debug('feed reducer', action, currState);
+            environment.showLogs && console.debug('feed > reducer', action, currState);
             switch (action.type) {
                 case 'concatList':
                     return [...currState, ...action.payload] as HNItem[];
@@ -40,7 +37,6 @@ export class FeedService {
     constructor(
         private fireService: FirebaseService
     ) {
-        console.log('heyo!');
     }
 
     get feedStories$(): Observable<HNItem[]> {
@@ -48,7 +44,6 @@ export class FeedService {
     }
 
     loadFeedByType(): Observable<FeedAction> {
-        // Load again from the first page
         this.page = 0;
 
         return this.fireService.getIDsList(this.feedType)

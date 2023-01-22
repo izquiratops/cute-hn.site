@@ -1,16 +1,16 @@
 import {Injectable} from "@angular/core";
 import {initializeApp} from 'firebase/app';
-import {DatabaseReference, child, get, getDatabase, ref} from 'firebase/database';
+import {child, DatabaseReference, get, getDatabase, ref} from 'firebase/database';
 
 import {EMPTY, from, Observable} from 'rxjs';
 import {expand, filter, map, mergeMap, pluck, reduce, tap,} from 'rxjs/operators';
 import {HNItem} from "./hn.modal";
+import {environment} from "../../environments/environment";
 
 @Injectable({
     providedIn: 'root',
 })
 export class FirebaseService {
-    private readonly DEBUG = false;
     private readonly VERSION = '/v0';
     private readonly DATABASE;
 
@@ -37,7 +37,13 @@ export class FirebaseService {
         );
     }
 
-    getStoryWithReplies(id: number): Observable<HNItem> {
+    getStoryWithReplies(id: number, limit: number = 3): Observable<HNItem> {
+        const context = {
+            parentNodes: [] as number[],
+            siblingNodes: [] as number[],
+            currentDepth: -1,
+        };
+
         return this.getItemById(id).pipe(
             // Fetch replies with recursion
             // Item struct:
@@ -45,10 +51,23 @@ export class FirebaseService {
             //  - 'parent' ref
             map((replies) => ({node: replies})),
             expand(({node}) => {
-                if (node.kids) {
+                if (context.parentNodes.includes(node.parent)) {
+                    context.siblingNodes.push(node.id);
+                } else {
+                    context.parentNodes = [...context.siblingNodes];
+                    context.siblingNodes = [node.id];
+                    context.currentDepth++;
+                }
+
+                if (node.kids && context.currentDepth < limit) {
                     return from(node.kids).pipe(
                         mergeMap((replyId) => this.getItemById(replyId)),
-                        map((reply) => ({node: reply, parent: node}))
+                        map((reply) => ({
+                            node: {
+                                ...reply,
+                                lazyLoaded: (context.currentDepth === limit) && (reply.kids?.length > 0)
+                            }, parent: node
+                        })),
                     );
                 } else {
                     return EMPTY;
@@ -62,7 +81,6 @@ export class FirebaseService {
                 }
                 return acc;
             }),
-            // Pluck into node because there's no parent on root
             pluck('node')
         );
     }
@@ -77,7 +95,7 @@ export class FirebaseService {
             .pipe(
                 map(snapshot => snapshot.val()),
                 filter((item) => !item.deleted),
-                tap((item) => this.DEBUG && console.debug(item))
+                tap((item) => environment.showLogs && console.debug('firebase > fetch', item))
             );
     }
 }

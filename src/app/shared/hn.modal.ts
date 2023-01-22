@@ -20,6 +20,7 @@ export interface HNItem {
     parts: number[]; // A list of related pollopts, in display order.
     descendants: number; // In the case of stories or polls, the total comment count.
     replies: HNItem[]; // The objects of the item's comments, this contains all the data to bind into the tree.
+    lazyLoaded: boolean;
 }
 
 export interface InterfaceType {

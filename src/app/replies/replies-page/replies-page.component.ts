@@ -5,6 +5,7 @@ import {ViewportScroller} from "@angular/common";
 import {map, Observable} from "rxjs";
 import {pluck} from "rxjs/operators";
 import {RepliesService} from "../replies.service";
+import {HNItem} from "../../shared/hn.modal";
 
 @Component({
   selector: 'app-replies-page',
@@ -41,6 +42,10 @@ export class RepliesPageComponent implements OnInit {
       pluck('url'),
       map(url => this.sanitizer.bypassSecurityTrustResourceUrl(url) ),
     );
+  }
+
+  handleLazyLoad(item: HNItem) {
+    console.debug('replies > handle lazy load', item);
   }
 
 }

@@ -1,7 +1,6 @@
 header {
   justify-content: center;
   grid-template-columns: var(--centered-layout);
-  margin-block-end: var(--space-md);
 }
 
 summary {
@@ -20,17 +19,9 @@ li {
 
 /* Header */
 
-.header-flex-wrapper {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-between;
-  gap: var(--space-sm);
-}
-
-.details-wrapper {
+.details-container {
   display: grid;
-  grid-auto-flow: row;
-  grid-row-gap: var(--space-xs);
+  gap: var(--space-xs);
 }
 
 /* List of replies */
@@ -50,7 +41,9 @@ li {
   padding-inline-start: var(--space-md);
 }
 
-/* When the screen está chiquita */
+.lazy-loaded-container {
+  margin-top: var(--space-md);
+}
 
 @media screen and (max-width: 810px) {
   header {

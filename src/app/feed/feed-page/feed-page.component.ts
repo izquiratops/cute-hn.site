@@ -46,7 +46,7 @@ export class FeedPageComponent implements AfterViewInit {
   }
 
   showConfigModal(): void {
-    this.settingsRef.aboutRef.nativeElement.showModal();
+    this.settingsRef.dialogRef.nativeElement.showModal();
   }
 
   reloadFeedList(event: any): void {

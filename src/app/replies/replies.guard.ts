@@ -15,12 +15,10 @@ export class RepliesGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    // Fetch data before navigation
-    const targetId = route.params['id'];
+    const targetId = Number(route.params['id']);
 
     return this.repliesService.loadStoryWithReplies(targetId).pipe(
       map(() => true),
-      // On error route back to feed
       catchError(_ => {
         this.router.navigate(['/feed']);
         return of(false);

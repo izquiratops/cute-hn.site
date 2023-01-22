@@ -5,42 +5,17 @@ import { Injectable } from '@angular/core';
 })
 export class SettingsService {
 
+  _fontAdjust!: string;
   _isDark!: boolean;
-  _fontSize!: string;
 
   constructor() { }
 
-  /* -------- Font Size --------- */
+  set fontAdjust(size: string) {
+    this._fontAdjust = size;
 
-  set fontSize(size: string) {
-    this._fontSize = size;
-
-    localStorage.setItem('fontSize', size);
+    localStorage.setItem('fontAdjust', size);
     this.applyFontSize();
   }
-
-  get fontSize(): string {
-    return this._fontSize;
-  }
-
-  initFontSize(): void {
-    const localStorageValue = localStorage.getItem('fontSize');
-    const computedStyleValue = getComputedStyle(document.documentElement)
-      .getPropertyValue('--theme-font-size')
-      .replace('px', '');
-
-    this._fontSize = localStorageValue || computedStyleValue;
-    this.applyFontSize();
-  }
-
-  private applyFontSize() {
-    document.documentElement.style.setProperty(
-      '--theme-font-size',
-      `${this._fontSize}px`
-    );
-  }
-
-  /* -------- Dark Theme -------- */
 
   set isDark(checked: boolean) {
     this._isDark = checked;
@@ -49,16 +24,19 @@ export class SettingsService {
     this.applyTheme();
   }
 
+  get fontAdjust(): string {
+    return this._fontAdjust;
+  }
+
   get isDark(): boolean {
     return this._isDark;
   }
 
-  initDarkTheme() {
-    const localStorageValue = localStorage.getItem('theme') === 'dark';
-    const matchMediaValue = window.matchMedia('(prefers-color-scheme: dark').matches;
-
-    this._isDark = localStorageValue || matchMediaValue;
-    this.applyTheme();
+  private applyFontSize() {
+    document.documentElement.style.setProperty(
+      '--font-adjust',
+      `${this._fontAdjust}%`
+    );
   }
 
   private applyTheme() {
@@ -67,5 +45,25 @@ export class SettingsService {
     } else {
       document.body.classList.remove("dark-theme");
     }
+  }
+
+  initFontSize(): void {
+    const localStorageValue = localStorage.getItem('fontAdjust');
+    const computedStyleValue = getComputedStyle(document.documentElement)
+        .getPropertyValue('--font-adjust')
+        .replace('%', '');
+
+    console.debug('settings service > font', localStorageValue, computedStyleValue);
+
+    this._fontAdjust = localStorageValue || computedStyleValue;
+    this.applyFontSize();
+  }
+
+  initDarkTheme() {
+    const localStorageValue = localStorage.getItem('theme') === 'dark';
+    const matchMediaValue = window.matchMedia('(prefers-color-scheme: dark').matches;
+
+    this._isDark = localStorageValue || matchMediaValue;
+    this.applyTheme();
   }
 }

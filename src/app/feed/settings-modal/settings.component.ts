@@ -10,7 +10,7 @@ import {SettingsService} from "./settings.service";
 })
 export class SettingsComponent {
 
-  @ViewChild('about', {static: true}) aboutRef!: ElementRef;
+  @ViewChild('dialog', {static: true}) dialogRef!: ElementRef;
 
   constructor(
     private route: Router,
@@ -20,19 +20,19 @@ export class SettingsComponent {
   }
 
   get fontSize(): number {
-    return parseInt(this.settingsService.fontSize);
+    return Number(this.settingsService.fontAdjust);
   }
 
   get isDarkTheme(): boolean {
     return this.settingsService.isDark;
   }
 
-  closeConfigModal() {
-    this.aboutRef.nativeElement.close();
+  closeModal() {
+    this.dialogRef.nativeElement.close();
   }
 
-  changeFontSize(event: any) {
-    this.settingsService.fontSize = event.target.value.toString();
+  changeFontAdjust(event: any) {
+    this.settingsService.fontAdjust = event.target.value.toString();
   }
 
   switchTheme(event: any) {

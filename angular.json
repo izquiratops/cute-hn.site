@@ -27,7 +27,6 @@
               "src/assets"
             ],
             "styles": [
-              "src/karla.css",
               "src/styles.css"
             ],
             "scripts": []

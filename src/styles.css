@@ -7,8 +7,7 @@
   --space-xl: 3rem;
   --space-xxl: 6rem;
 
-  /* Default value is 13px, then JS applies the user stored value */
-  --theme-font-size: 15px;
+  --font-adjust: 100%;
 
   --centered-layout: minmax(
     min(60ch, 80vw),
@@ -24,16 +23,29 @@
   --background: hsl(40, 20%, 95%);
   --font-main: hsl(0, 0%, 0%);
   --font-alt: hsl(40, 20%, 100%);
-  --primary-main: hsl(180, 63%, 30%);
-  --primary-alt: hsl(185, 68%, 87%);
+  --primary-main: hsl(17, 80%, 70%);
+  --primary-alt: hsl(0, 90%, 65%);
+}
+
+@font-face {
+  font-family: 'Nunito';
+  src: url('assets/Nunito/Nunito-Medium.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Nunito Black';
+  src: url('assets/Nunito/Nunito-Black.ttf');
+  font-weight: normal;
+  font-style: normal;
 }
 
 html {
   block-size: 100%;
   inline-size: 100%;
-
-  font-family: 'Karla', system-ui, sans-serif;
-  font-size: var(--theme-font-size, 20px);
+  font-family: 'Nunito', system-ui, sans-serif;
+  font-size: var(--font-adjust);
 }
 
 body {
@@ -54,8 +66,8 @@ body.dark-theme {
   --background: hsl(200, 10%, 10%);
   --font-main: hsl(40, 30%, 100%);
   --font-alt: hsl(40, 30%, 100%);
-  --primary-main: hsl(220, 65%, 60%);
-  --primary-alt: hsl(200, 50%, 70%);
+  --primary-main: hsl(17, 80%, 70%);
+  --primary-alt: hsl(0, 90%, 65%);
 }
 
 main {
@@ -63,6 +75,10 @@ main {
   justify-content: center;
   grid-template-columns: var(--centered-layout);
   margin-block-end: var(--space-xxl);
+}
+
+select, button {
+  font-family: 'Nunito', system-ui, sans-serif;
 }
 
 ul {
@@ -100,11 +116,13 @@ p {
 }
 
 h1 {
-  font-size: 3rem;
+  font-family: 'Nunito Black', system-ui, sans-serif;
+  font-size: 4rem;
 }
 
 h2 {
-  font-size: 1.6rem;
+  font-family: 'Nunito Black', system-ui, sans-serif;
+  font-size: 2rem;
 }
 
 h3 {
@@ -138,8 +156,8 @@ hr {
 }
 
 /* This selector affects only the <pre> elements written in the replies
- * BUT there's no way to apply it there because of encapsulation, so it
- * stays here.
+ * BUT there's no way to apply it on that component because of encapsulation,
+ * so it stays here.
  */
 /* TODO: .text-replies */
 pre {
@@ -154,7 +172,7 @@ pre {
   }
 
   h1 {
-    font-size: 1.8rem;
+    font-size: 3rem;
   }
 
   header {
